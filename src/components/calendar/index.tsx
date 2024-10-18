@@ -1,0 +1,22 @@
+"use client";
+
+import { getDaysOfCurrentMonth } from "@/lib/utils";
+import React from "react";
+import Day from "./day";
+import Header from "./header";
+
+const Calendar = () => {
+  const days = getDaysOfCurrentMonth();
+  return (
+    <div className="mx-auto w-full max-w-3xl rounded-xl bg-black p-8">
+      <Header />
+      <div className="grid grid-cols-7 gap-2">
+        {days.map((day, i) => (
+          <Day day={day} key={i} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Calendar;
