@@ -5,3 +5,10 @@ export type Service<T = Icon | React.ComponentType<unknown>> = {
   name: string;
   icon: T;
 };
+
+export type Subscription = {
+  id: string;
+  service: Service;
+  price: number;
+  date: string;
+};
