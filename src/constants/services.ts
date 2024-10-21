@@ -9,6 +9,7 @@ import {
   TwitterLogo,
   OpenAiLogo,
   DribbbleLogo,
+  CurrencyDollar,
 } from "@phosphor-icons/react/dist/ssr";
 
 export const SERVICES: Service[] = [
@@ -61,5 +62,10 @@ export const SERVICES: Service[] = [
     name: "Adobe",
     id: "adobe",
     icon: Adobe,
+  },
+  {
+    name: "Other",
+    id: "other",
+    icon: CurrencyDollar,
   },
 ];
