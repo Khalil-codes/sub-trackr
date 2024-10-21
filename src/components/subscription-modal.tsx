@@ -32,9 +32,12 @@ import {
   SelectValue,
 } from "./ui/select";
 import { SERVICES } from "@/constants/services";
+import { useSubscription } from "@/store/use-subscription";
+import { v4 as uuid } from "uuid";
 
 const schema = z.object({
   subscription: z.string(),
+  other: z.string().optional(),
   price: z.coerce.number(),
   date: z.string(),
 });
@@ -44,12 +47,18 @@ type FormSchema = z.infer<typeof schema>;
 const defaultValues: FormSchema = {
   subscription: "",
   price: 0,
+  other: "",
   date: "",
 };
 
 const SubscriptionsModal = () => {
   const day = useModal((state) => state.date);
   const subscription = useModal((state) => state.subcription);
+  const modal = useModal((state) => state.modal);
+  const view = useModal((state) => state.view);
+  const setModal = useModal((state) => state.setModal);
+  const addSubscription = useSubscription((state) => state.addSubscription);
+
   const form = useForm<FormSchema>({
     resolver: zodResolver(schema),
     defaultValues: subscription
@@ -61,13 +70,32 @@ const SubscriptionsModal = () => {
       : defaultValues,
   });
 
-  const { control, handleSubmit } = form;
-  const modal = useModal((state) => state.modal);
-  const view = useModal((state) => state.view);
-  const setModal = useModal((state) => state.setModal);
+  const { control, handleSubmit, reset, watch } = form;
+
+  const hasSelectedOther = watch("subscription") === "other";
 
   const onSubmit: SubmitHandler<FormSchema> = (data) => {
-    console.log({ ...data, day });
+    if (!subscription) {
+      const _subscription = SERVICES.find(
+        (service) => service.id === data.subscription
+      );
+
+      if (_subscription) {
+        addSubscription({
+          id: uuid(),
+          service: {
+            ..._subscription,
+            name:
+              hasSelectedOther && data.other ? data.other : _subscription.name,
+          },
+          price: data.price,
+          date: day!,
+        });
+      }
+    }
+
+    reset();
+    setModal({ modal: false, subcription: null, view: null });
   };
 
   return (
@@ -75,6 +103,7 @@ const SubscriptionsModal = () => {
       open={modal}
       onOpenChange={(open) => {
         if (!open) {
+          reset();
           setModal({ modal: false, subcription: null, view: null });
         }
       }}>
@@ -92,7 +121,10 @@ const SubscriptionsModal = () => {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form id="subscription-form" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            id="subscription-form"
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-4">
             <FormField
               name="subscription"
               control={control}
@@ -122,6 +154,22 @@ const SubscriptionsModal = () => {
                 </FormItem>
               )}
             />
+            {hasSelectedOther && (
+              <FormField
+                name="other"
+                rules={{ required: hasSelectedOther }}
+                control={control}
+                render={({ field }) => (
+                  <FormItem className="space-y-2">
+                    <FormLabel>Other</FormLabel>
+                    <FormControl className="space-y-2">
+                      <Input type="text" placeholder="XYZ" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
             <FormField
               name="price"
               control={control}
@@ -129,7 +177,7 @@ const SubscriptionsModal = () => {
                 <FormItem className="space-y-2">
                   <FormLabel>Price</FormLabel>
                   <FormControl className="space-y-2">
-                    <Input type="number" {...field} />
+                    <Input type="number" placeholder="$2.99" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
