@@ -11,9 +11,13 @@ const Calendar = () => {
     <div className="mx-auto w-full max-w-3xl rounded-xl bg-black p-8">
       <Header />
       <div className="grid grid-cols-7 gap-2">
-        {days.map((day, i) => (
-          <Day day={day} key={i} />
-        ))}
+        {days.map((day, i) =>
+          day ? (
+            <Day day={day} key={i} />
+          ) : (
+            <div key={i} className="aspect-square" />
+          )
+        )}
       </div>
     </div>
   );
