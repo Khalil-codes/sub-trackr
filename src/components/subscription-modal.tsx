@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Dialog,
   DialogClose,
@@ -53,7 +53,7 @@ const defaultValues: FormSchema = {
 
 const SubscriptionsModal = () => {
   const day = useModal((state) => state.date);
-  const subscription = useModal((state) => state.subcription);
+  const subscription = useModal((state) => state.subscription);
   const modal = useModal((state) => state.modal);
   const view = useModal((state) => state.view);
   const setModal = useModal((state) => state.setModal);
@@ -61,16 +61,23 @@ const SubscriptionsModal = () => {
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(schema),
-    defaultValues: subscription
-      ? {
-          date: subscription.date,
-          subscription: subscription.service.id,
-          price: subscription.price,
-        }
-      : defaultValues,
+    defaultValues: defaultValues,
   });
 
-  const { control, handleSubmit, reset, watch } = form;
+  const { control, handleSubmit, reset, watch, setValue } = form;
+
+  useEffect(() => {
+    if (subscription) {
+      setValue("subscription", subscription.service.id);
+
+      if (subscription.service.id === "other") {
+        setValue("other", subscription.service.name);
+      }
+
+      setValue("price", subscription.price);
+      setValue("date", subscription.date);
+    }
+  }, [subscription, setValue]);
 
   const hasSelectedOther = watch("subscription") === "other";
 
@@ -94,8 +101,8 @@ const SubscriptionsModal = () => {
       }
     }
 
-    reset();
-    setModal({ modal: false, subcription: null, view: null });
+    reset(defaultValues);
+    setModal({ modal: false, subscription: null, view: null });
   };
 
   return (
@@ -103,8 +110,8 @@ const SubscriptionsModal = () => {
       open={modal}
       onOpenChange={(open) => {
         if (!open) {
-          reset();
-          setModal({ modal: false, subcription: null, view: null });
+          reset(defaultValues);
+          setModal({ modal: false, subscription: null, view: null });
         }
       }}>
       <DialogContent>
@@ -186,7 +193,7 @@ const SubscriptionsModal = () => {
           </form>
         </Form>
         <DialogFooter>
-          <DialogClose>
+          <DialogClose asChild>
             <Button variant="destructive">Cancel</Button>
           </DialogClose>
           <Button type="submit" form="subscription-form">
