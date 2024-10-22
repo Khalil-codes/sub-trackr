@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 type State = {
   modal: boolean;
-  subcription?: Subscription | null;
+  subscription?: Subscription | null;
   view?: "add" | "edit" | "view" | null;
   date?: string | null;
 };
@@ -15,7 +15,7 @@ type Actions = {
 
 export const useModal = create<State & Actions>()((set) => ({
   modal: false,
-  subcription: null,
+  subscription: null,
   view: null,
   setModal: (args) => set(args),
 }));
