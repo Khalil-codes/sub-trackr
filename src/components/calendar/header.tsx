@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="mb-4 grid grid-cols-7 gap-2">
+    <div className="font-giest-mono mb-4 grid grid-cols-7 gap-2">
       {["mon", "tue", "wed", "thu", "fri", "sat", "sun"].map((day, i) => (
         <div
           key={i}

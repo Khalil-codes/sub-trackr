@@ -13,6 +13,7 @@ import { useSubscription } from "@/store/use-subscription";
 import { Button } from "./ui/button";
 import { useModal } from "@/store/use-modal";
 import { renderServiceIcon } from "@/constants/icons";
+import TotalAmount from "./toal-amount";
 
 const SubscriptionTable = () => {
   const subscriptions = useSubscription((state) => state.subscriptions);
@@ -20,10 +21,15 @@ const SubscriptionTable = () => {
   const setModal = useModal((state) => state.setModal);
   return (
     <section className="w-full">
-      <h2 className="mb-3 text-xl font-bold text-primary">Subscriptions</h2>
+      <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+        <h2 className="font-giest-mono text-xl font-bold text-primary">
+          Subscriptions
+        </h2>
+        <TotalAmount />
+      </div>
       <div className="overflow-auto rounded-lg bg-white/80 p-6 text-primary shadow-sm dark:bg-black">
         <Table>
-          <TableHeader className="bg-gray-200/70 uppercase dark:bg-gray-800/50 [&_tr]:border-none">
+          <TableHeader className="font-giest-mono bg-gray-200/70 uppercase dark:bg-gray-800/50 [&_tr]:border-none">
             <TableRow className="rounded-xl hover:bg-gray-200 dark:hover:bg-gray-900">
               <TableHead className="h-14 text-primary">Subscription</TableHead>
               <TableHead className="h-14 text-primary">Date</TableHead>
