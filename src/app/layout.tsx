@@ -27,15 +27,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} bg-gray-200 antialiased dark:bg-neutral-900`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} bg-gray-200 antialiased dark:bg-neutral-900`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <main className="container mx-auto flex min-h-screen flex-col px-2 md:px-4">
             {children}
           </main>
           <Toaster richColors />
-        </body>
-      </ThemeProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
