@@ -1,5 +1,6 @@
 "use client";
 
+import { renderServiceIcon } from "@/constants/icons";
 import { cn } from "@/lib/utils";
 import { useModal } from "@/store/use-modal";
 import { useSubscription } from "@/store/use-subscription";
@@ -38,7 +39,7 @@ const Day = ({ day }: Props) => {
             className={cn("rounded-full bg-primary p-2 ring-1", {
               "-ml-2": index > 0,
             })}>
-            <sub.service.icon size={14} />
+            {renderServiceIcon(sub.service.id)}
           </div>
         ))}
         {subscription.length > 2 && (

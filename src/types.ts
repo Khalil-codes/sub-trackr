@@ -1,9 +1,8 @@
-import { Icon } from "@phosphor-icons/react";
+import { ServiceId } from "./constants/icons";
 
-export type Service<T = Icon | React.ComponentType<unknown>> = {
-  id: string;
+export type Service = {
+  id: ServiceId;
   name: string;
-  icon: T;
 };
 
 export type Subscription = {

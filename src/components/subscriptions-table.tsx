@@ -12,6 +12,7 @@ import {
 import { useSubscription } from "@/store/use-subscription";
 import { Button } from "./ui/button";
 import { useModal } from "@/store/use-modal";
+import { renderServiceIcon } from "@/constants/icons";
 
 const SubscriptionTable = () => {
   const subscriptions = useSubscription((state) => state.subscriptions);
@@ -47,7 +48,7 @@ const SubscriptionTable = () => {
                 className="border-b-[0.5px] border-b-gray-500 hover:bg-gray-900">
                 <TableCell>
                   <div className="flex items-center gap-2">
-                    <subscription.service.icon size={20} />{" "}
+                    {renderServiceIcon(subscription.service.id)}
                     <span>{subscription.service.name}</span>
                   </div>
                 </TableCell>

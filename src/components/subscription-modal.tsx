@@ -34,6 +34,7 @@ import {
 import { SERVICES } from "@/constants/services";
 import { useSubscription } from "@/store/use-subscription";
 import { v4 as uuid } from "uuid";
+import { renderServiceIcon } from "@/constants/icons";
 
 const schema = z.object({
   subscription: z.string(),
@@ -150,7 +151,7 @@ const SubscriptionsModal = () => {
                       {SERVICES.map((service) => (
                         <SelectItem key={service.id} value={service.id}>
                           <div className="flex items-center gap-2">
-                            <service.icon />
+                            {renderServiceIcon(service.id)}
                             <span>{service.name}</span>
                           </div>
                         </SelectItem>

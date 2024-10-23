@@ -1,3 +1,15 @@
+import {
+  SpotifyLogo,
+  TwitchLogo,
+  YoutubeLogo,
+  AmazonLogo,
+  AppleLogo,
+  TwitterLogo,
+  OpenAiLogo,
+  DribbbleLogo,
+  CurrencyDollar,
+} from "@phosphor-icons/react/dist/ssr";
+
 export const Netflix = () => (
   <>
     <div className="h-4 w-4 text-red-600">
@@ -51,3 +63,24 @@ export const Adobe = () => (
     </div>
   </>
 );
+
+export const SERVICE_ICONS = {
+  netflix: Netflix,
+  spotify: SpotifyLogo,
+  youtube: YoutubeLogo,
+  twitch: TwitchLogo,
+  amazon: AmazonLogo,
+  apple: AppleLogo,
+  twitter: TwitterLogo,
+  openai: OpenAiLogo,
+  dribbble: DribbbleLogo,
+  adobe: Adobe,
+  other: CurrencyDollar,
+};
+
+export type ServiceId = keyof typeof SERVICE_ICONS;
+
+export const renderServiceIcon = (serviceId: ServiceId) => {
+  const ServiceIcon = SERVICE_ICONS[serviceId];
+  return <ServiceIcon size={18} />;
+};
