@@ -59,6 +59,7 @@ const SubscriptionsModal = () => {
   const view = useModal((state) => state.view);
   const setModal = useModal((state) => state.setModal);
   const addSubscription = useSubscription((state) => state.addSubscription);
+  const editSubscription = useSubscription((state) => state.updateSubscription);
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(schema),
@@ -83,23 +84,34 @@ const SubscriptionsModal = () => {
   const hasSelectedOther = watch("subscription") === "other";
 
   const onSubmit: SubmitHandler<FormSchema> = (data) => {
-    if (!subscription) {
-      const _subscription = SERVICES.find(
-        (service) => service.id === data.subscription
-      );
+    const _subscription = SERVICES.find(
+      (service) => service.id === data.subscription
+    );
 
-      if (_subscription) {
-        addSubscription({
-          id: uuid(),
-          service: {
-            ..._subscription,
-            name:
-              hasSelectedOther && data.other ? data.other : _subscription.name,
-          },
-          price: data.price,
-          date: day!,
-        });
-      }
+    if (!_subscription) return;
+
+    if (!subscription) {
+      addSubscription({
+        id: uuid(),
+        service: {
+          ..._subscription,
+          name:
+            hasSelectedOther && data.other ? data.other : _subscription.name,
+        },
+        price: data.price,
+        date: day!,
+      });
+    } else {
+      const updatedSubscription = {
+        ...subscription,
+        service: {
+          ..._subscription,
+          name:
+            hasSelectedOther && data.other ? data.other : _subscription.name,
+        },
+        price: data.price,
+      };
+      editSubscription(subscription.id, updatedSubscription);
     }
 
     reset(defaultValues);
