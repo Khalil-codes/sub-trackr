@@ -6,7 +6,7 @@ const Header = () => {
       {["mon", "tue", "wed", "thu", "fri", "sat", "sun"].map((day, i) => (
         <div
           key={i}
-          className="text-center text-xs font-semibold uppercase text-gray-300">
+          className="text-center text-xs font-semibold uppercase text-gray-900 dark:text-gray-300">
           {day}
         </div>
       ))}

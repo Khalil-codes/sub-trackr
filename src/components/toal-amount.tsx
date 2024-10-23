@@ -7,7 +7,7 @@ const TotalAmount = () => {
   const subscriptions = useSubscription((state) => state.subscriptions);
 
   return (
-    <h2 className="text-xl font-bold text-primary-foreground">
+    <h2 className="text-xl font-bold text-primary">
       Total Amount:{" "}
       <span className="text-3xl">
         ₹&nbsp;

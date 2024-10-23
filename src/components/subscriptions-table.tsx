@@ -20,32 +20,22 @@ const SubscriptionTable = () => {
   const setModal = useModal((state) => state.setModal);
   return (
     <section className="w-full">
-      <h2 className="mb-3 text-xl font-bold text-primary-foreground">
-        Subscriptions
-      </h2>
-      <div className="overflow-auto rounded-lg bg-black p-6 text-primary-foreground shadow-sm dark:bg-black">
+      <h2 className="mb-3 text-xl font-bold text-primary">Subscriptions</h2>
+      <div className="overflow-auto rounded-lg bg-white/80 p-6 text-primary shadow-sm dark:bg-black">
         <Table>
-          <TableHeader className="bg-gray-800/50 uppercase [&_tr]:border-none">
-            <TableRow className="rounded-xl hover:bg-gray-900">
-              <TableHead className="h-14 text-primary-foreground">
-                Subscription
-              </TableHead>
-              <TableHead className="h-14 text-primary-foreground">
-                Date
-              </TableHead>
-              <TableHead className="h-14 text-primary-foreground">
-                Cost
-              </TableHead>
-              <TableHead className="h-14 text-primary-foreground">
-                Actions
-              </TableHead>
+          <TableHeader className="bg-gray-200/70 uppercase dark:bg-gray-800/50 [&_tr]:border-none">
+            <TableRow className="rounded-xl hover:bg-gray-200 dark:hover:bg-gray-900">
+              <TableHead className="h-14 text-primary">Subscription</TableHead>
+              <TableHead className="h-14 text-primary">Date</TableHead>
+              <TableHead className="h-14 text-primary">Cost</TableHead>
+              <TableHead className="h-14 text-primary">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {subscriptions.map((subscription) => (
               <TableRow
                 key={subscription.id}
-                className="border-b-[0.5px] border-b-gray-500 hover:bg-gray-900">
+                className="border-b-[0.5px] border-b-gray-500 hover:bg-gray-200 dark:hover:bg-gray-900">
                 <TableCell>
                   <div className="flex items-center gap-2">
                     {renderServiceIcon(subscription.service.id)}
@@ -59,7 +49,7 @@ const SubscriptionTable = () => {
                     <Button
                       size="sm"
                       className="py-1"
-                      variant="secondary"
+                      variant="ghost"
                       onClick={() =>
                         setModal({ modal: true, subscription, view: "edit" })
                       }>
