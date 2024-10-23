@@ -2,7 +2,6 @@ import Calendar from "@/components/calendar";
 import SubscriptionsModal from "@/components/subscription-modal";
 import SubscriptionTable from "@/components/subscriptions-table";
 import { ModeToggle } from "@/components/theme-toggle";
-import TotalAmount from "@/components/toal-amount";
 
 export default function Home() {
   return (
