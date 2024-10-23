@@ -184,7 +184,7 @@ const SubscriptionsModal = () => {
                 <FormItem className="space-y-2">
                   <FormLabel>Price</FormLabel>
                   <FormControl className="space-y-2">
-                    <Input type="number" placeholder="$2.99" {...field} />
+                    <Input type="number" placeholder="₹99" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
