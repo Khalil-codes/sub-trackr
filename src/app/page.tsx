@@ -5,7 +5,7 @@ import { ModeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col justify-center gap-8 px-6 py-14">
+    <div className="flex flex-1 flex-col justify-center gap-8 px-2 py-14 md:px-6">
       <h1 className="font-giest-mono mb-4 text-center text-2xl font-bold text-primary md:text-4xl">
         Your own subscription tracker
       </h1>

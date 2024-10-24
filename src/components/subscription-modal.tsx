@@ -127,7 +127,7 @@ const SubscriptionsModal = () => {
           setModal({ modal: false, subscription: null, view: null });
         }
       }}>
-      <DialogContent>
+      <DialogContent className="mx-auto w-[80%] md:w-full">
         <DialogHeader>
           <DialogTitle>
             {view === "add" && "Add Subscription"}
@@ -205,7 +205,7 @@ const SubscriptionsModal = () => {
             />
           </form>
         </Form>
-        <DialogFooter>
+        <DialogFooter className="gap-2">
           <DialogClose asChild>
             <Button variant="destructive">Cancel</Button>
           </DialogClose>

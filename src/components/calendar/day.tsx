@@ -28,10 +28,10 @@ const Day = ({ day }: Props) => {
         setModal({ modal: true, view: "add", date: day.toString() })
       }
       className={cn(
-        "flex aspect-square cursor-pointer flex-col items-center justify-between rounded-lg bg-gray-300/40 p-1 transition hover:bg-gray-300 dark:bg-gray-900/50 dark:hover:bg-gray-900",
+        "flex aspect-[9/16] cursor-pointer flex-col items-center justify-between rounded-lg bg-gray-300/40 p-1 transition hover:bg-gray-300 dark:bg-gray-900/50 dark:hover:bg-gray-900 md:aspect-square",
         { "bg-gray-300 dark:bg-gray-900": isToday }
       )}>
-      <div className="isolation-auto flex h-1/2 w-full items-center justify-center text-white">
+      <div className="isolation-auto flex h-1/2 w-full items-center justify-center text-white max-md:scale-75">
         {subscription.slice(0, 2).map((sub, index) => (
           <div
             key={sub.id}

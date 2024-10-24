@@ -8,9 +8,9 @@ import Header from "./header";
 const Calendar = () => {
   const days = getDaysOfCurrentMonth();
   return (
-    <div className="mx-auto w-full max-w-3xl rounded-xl bg-white/80 p-8 backdrop-blur-lg dark:bg-black">
+    <div className="mx-auto w-full max-w-3xl rounded-xl bg-white/80 p-4 backdrop-blur-lg dark:bg-black md:p-8">
       <Header />
-      <div className="grid grid-cols-7 gap-2">
+      <div className="grid grid-cols-7 gap-1 md:gap-2">
         {days.map((day, i) =>
           day ? (
             <Day day={day} key={i} />
